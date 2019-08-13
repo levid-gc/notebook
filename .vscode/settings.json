@@ -3,6 +3,7 @@
         "BIGINT",
         "DECFLOAT",
         "SMALLINT",
+        "dbcontext",
         "postgresql"
     ]
 }
