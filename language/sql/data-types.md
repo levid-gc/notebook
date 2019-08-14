@@ -98,6 +98,46 @@ CREATE TABLE XLTAE (
 
 上面的示例中，`LANGUAGE_1` 使用的是默认的字符集，`LANGUAGE_3` 使用的是国际字符集，`LANGUAGE_2` 使用的是指定的 Greek 字符集，而 `LANGUAGE_4` 使用的指定的 Kanji 字符集。
 
+## 4 二进制字符串
+
+### 4.1 `BINARY`
+
+### 4.2 `BINARY VARYING`
+
+### 4.3 `BINARY LARGE OBJECT`
+
+## 5 布尔
+
+`BOOLEAN` 数据类型包含两种不同的值 `True` 和 `False`。
+
+## 6 日期/时间
+
+SQL 标准定义了 5 种数据类型来处理日期与时间，它们被称为 _datetime_ 数据类型。因为这些数据类型一定程度上存在重合，所以某些实现不一定提供所有的这些类型。
+
+### 6.1 `DATE`
+
+`DATE` 类型存储日期的年，月，日。年份是 4 个数字长度，月份和天都是 2 个数字长度。`DATE` 能够表示 _0001_ 到 _9999_ 年份的任意日期。`DATE` 的长度为 10 位，比如 `2019-08-14`。
+
+### 6.2 `TIME WITHOUT TIME ZONE`
+
+`TIME WITHOUT TIME ZONE` 存储时间的时，分，秒。时和分各由 2 个数字组成，秒可能仅有 2 个数字，也有可能扩展包含可选的小数部分。比如：_09:32:58.436_。
+
+小数部分的精度取决于具体的实现，但是至少有 6 个数字的长度。没有小数位的时候 `TIME WITHOUT TIME ZONE` 占用 8 位，反之 9 位。`TIME WITHOUT TIME ZONE` 数据类型也可以使用 `TIME` 表示，默认没有小数位数字，而 `TIME WITHOUT TIME ZONE(p)` 中的 `p` 表示小数位数字个数。上面示例中的数据就可以使用 `TIME WITHOUT TIME ZONE(3)` 表示。
+
+### 6.3 `TIMESTAMP WITHOUT TIME ZONE`
+
+`TIMESTAMP WITHOUT TIME ZONE` 数据包含了日期和时间信息。`TIMESTAMP WITHOUT TIME ZONE` 数据各部分的长度与约束与 `DATE` 和 `TIME WITHOUT TIME ZONE` 等同，但有一个不同的地方除外：时间组件的小数部分默认长度为 6 个数字。
+
+如果这个值没有小数部分数字，那么 `TIMESTAMP WITHOUT TIME ZONE` 占用 19 位长度——10 个日期位，1 个空格作为分隔符，以及 8 个时间位。如果有小数部分（默认 6 个小数数字），那么加上小数部分数字就为 20 位长度。`TIMESTAMP WITHOUT TIME ZONE` 数据类型可以使用 `TIMESTAMP WITHOUT TIME ZONE` 或 `TIMESTAMP WITHOUT TIME ZONE(p)` 指定，`p` 为小数部分的数字个数，`p` 的值不能为负数，同时具体的实现决定了它的最大值。
+
+### 6.4 `TIME WITH TIME ZONE`
+
+`TIME WITH TIME ZONE` 数据类型与 `TIME WITHOUT TIME ZONE` 数据类型一样，但是这个类型会在最后添加 UTC (Coordinated Universal  Time) 协调世界时偏移信息（UTC 是 GMT 的后继者）。偏移值范围为 `–12:59` 到 `+13:00`。这个额外的信息占用了 6 个数字位——一个作为分隔符的连字符，一个加或减号，然后是小时偏移（两个数字），分钟偏移（两个数字），小时与分钟之间使用分号隔开。没有小数位的 `TIME WITH TIME ZONE` 值（默认）是 14 位长。如果你制定了小数部分，那么加上小数部分数字位 15 位。
+
+### 6.5 `TIMESTAMP WITH TIME ZONE`
+
+`TIMESTAMP WITH TIME ZONE` 与 `TIMESTAMP WITHOUT TIME ZONE` 也类似，除了额外的 UTC 偏移。额外的信息占用了 6 个数字位（参见 `TIME WITH TIME ZONE`）。没有小数位占用 25 位，反之，占用 26 位（小数位默认为 6 个数字）。
+
 ## 附录：参考资料
 
 - [SQL For Dummies, 9th Edition](https://www.dummies.com/store/product/SQL-For-Dummies-9th-Edition.productCd-1119527074.html#)
