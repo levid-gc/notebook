@@ -15,6 +15,19 @@
 | serial           | 1 - 2147483647                                          | 4 字节 |
 | bigserial        | 1 - 9223372036854775807                                 | 8 字节 |
 
+## 字符类型
+
+| 数据类型                             | 描述                           |
+| :----------------------------------- | :----------------------------- |
+| character varying(*n*), varchar(*n*) | 有长度限制的可变长字符串数据   |
+| character(*n*), char(*n*)            | 固定长度，空白填充的字符串数据 |
+| text                                 | 不限长度的可变长字符串         |
+
+> **提示**
+>
+> 这三种数据类型没有太大的性能差别，除了使用空白填充的类型会增加额外的存储空间外，还有一些额外的 CPU 周期用于检查具有长度约束的列。虽然 `character(n)` 在某些其他的数据库系统中具有一些性能优势，但是在 PostgreSQL 中却没有。事实上，`character(n)` 通常来说在这三种类型中是最慢的一个，因为它有额外的存储损耗。在多数情况下推荐使用 `text` 或 `character varying`。
+
 ## 附录：参考资料
 
 - [Numeric Types](https://www.postgresql.org/docs/11/datatype-numeric.html)
+- [Character Types](https://www.postgresql.org/docs/11/datatype-character.html)

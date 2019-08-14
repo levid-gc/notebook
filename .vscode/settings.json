@@ -1,10 +1,14 @@
 {
     "cSpell.words": [
         "BIGINT",
+        "CLOB",
         "DECFLOAT",
         "LINQ",
         "SMALLINT",
+        "VARCHAR",
+        "bigserial",
         "dbcontext",
-        "postgresql"
+        "postgresql",
+        "smallserial"
     ]
 }
