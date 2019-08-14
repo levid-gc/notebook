@@ -27,6 +27,15 @@
 >
 > 这三种数据类型没有太大的性能差别，除了使用空白填充的类型会增加额外的存储空间外，还有一些额外的 CPU 周期用于检查具有长度约束的列。虽然 `character(n)` 在某些其他的数据库系统中具有一些性能优势，但是在 PostgreSQL 中却没有。事实上，`character(n)` 通常来说在这三种类型中是最慢的一个，因为它有额外的存储损耗。在多数情况下推荐使用 `text` 或 `character varying`。
 
+## 布尔类型
+
+| 数据类型 | 描述                   | 存储   |
+| :------- | :--------------------- | :----- |
+| boolean  | `true` 或 `false` 状态 | 1 字节 |
+
+- `TRUE` 状态：`true`, `yes`, `on`, `1`
+- `FALSE` 状态：`false`, `no`, `off`, `0`
+
 ## 附录：参考资料
 
 - [Numeric Types](https://www.postgresql.org/docs/11/datatype-numeric.html)
